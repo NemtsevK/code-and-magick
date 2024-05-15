@@ -1,73 +1,44 @@
-import {showAlert, getRandomArrayElement} from './util.js';
-import {sendData} from './api.js';
-
-const Color = {
-  FIREBALLS: [
-    '#ee4830',
-    '#30a8ee',
-    '#5ce6c0',
-    '#e848d5',
-    '#e6e848',
-  ],
-  EYES: [
-    'black',
-    'red',
-    'blue',
-    'yellow',
-    'green',
-  ],
-  COATS: [
-    'rgb(101, 137, 164)',
-    'rgb(241, 43, 107)',
-    'rgb(146, 100, 161)',
-    'rgb(56, 159, 117)',
-    'rgb(215, 210, 55)',
-    'rgb(0, 0, 0)',
-  ],
-};
-
-const SubmitButtonText = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...'
-};
+import { showAlert, getRandomArrayElement } from './util.js';
+import { sendData } from './api.js';
+import { Color, SubmitButtonText } from './const.js';
 
 const wizardForm = document.querySelector('.setup-wizard-form');
-const fireballColorElement = wizardForm.querySelector('.setup-fireball-wrap');
+const fireballColorElement = wizardForm.querySelector('.setup__fireball-wrap');
 const eyesColorElement = wizardForm.querySelector('.wizard-eyes');
 const coatColorElement = wizardForm.querySelector('.wizard-coat');
 const fireballColorInput = wizardForm.querySelector('[name="fireball-color"]');
 const eyesColorInput = wizardForm.querySelector('[name="eyes-color"]');
 const coatColorInput = wizardForm.querySelector('[name="coat-color"]');
-const submitButton = wizardForm.querySelector('.setup-submit');
+const submitButton = wizardForm.querySelector('.setup__submit');
 
-fireballColorElement.addEventListener('click', (evt) => {
+fireballColorElement.addEventListener('click', (event) => {
   const randomColor = getRandomArrayElement(Color.FIREBALLS);
-  evt.target.style.backgroundColor = randomColor;
+  event.target.style.backgroundColor = randomColor;
   fireballColorInput.value = randomColor;
 });
 
 const setEyesClick = (cb) => {
-  eyesColorElement.addEventListener('click', (evt) => {
+  eyesColorElement.addEventListener('click', (event) => {
     const randomColor = getRandomArrayElement(Color.EYES);
-    evt.target.style.fill = randomColor;
+    event.target.style.fill = randomColor;
     eyesColorInput.value = randomColor;
     cb();
   });
 };
 
 const setCoatClick = (cb) => {
-  coatColorElement.addEventListener('click', (evt) => {
+  coatColorElement.addEventListener('click', (event) => {
     const randomColor = getRandomArrayElement(Color.COATS);
-    evt.target.style.fill = randomColor;
+    event.target.style.fill = randomColor;
     coatColorInput.value = randomColor;
     cb();
   });
 };
 
 const pristine = new Pristine(wizardForm, {
-  classTo: 'setup-wizard-form__element',
-  errorTextParent: 'setup-wizard-form__element',
-  errorTextClass: 'setup-wizard-form__error-text',
+  classTo: 'setup__user-name',
+  errorTextParent: 'setup__user-name',
+  errorTextClass: 'setup__user-name-error',
 });
 
 const blockSubmitButton = () => {
@@ -81,17 +52,18 @@ const unblockSubmitButton = () => {
 };
 
 const setUserFormSubmit = (onSuccess) => {
-  wizardForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  wizardForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
     const isValid = pristine.validate();
+
     if (isValid) {
       blockSubmitButton();
-      sendData(new FormData(evt.target))
+      sendData(new FormData(event.target))
         .then(onSuccess)
         .catch(
-          (err) => {
-            showAlert(err.message);
+          (error) => {
+            showAlert(error.message);
           }
         )
         .finally(unblockSubmitButton);
@@ -99,4 +71,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {setUserFormSubmit, setEyesClick, setCoatClick};
+export { setUserFormSubmit, setEyesClick, setCoatClick };

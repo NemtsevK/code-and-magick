@@ -1,12 +1,11 @@
 import './setup.js';
-import {closeUserModal} from './user-modal.js';
-import {setUserFormSubmit, setEyesClick, setCoatClick} from './user-form.js';
-import {renderSimilarList} from './similar-list.js';
-import {getData} from './api.js';
-import {showAlert, debounce} from './util.js';
+import { closeUserModal } from './user-modal.js';
+import { setUserFormSubmit, setEyesClick, setCoatClick } from './user-form.js';
+import { renderSimilarList } from './similar-list.js';
+import { getData } from './api.js';
+import { showAlert, debounce } from './util.js';
+import { RERENDER_DELAY } from './const.js';
 import './avatar.js';
-
-const RERENDER_DELAY = 500;
 
 getData()
   .then((wizards) => {
@@ -21,8 +20,8 @@ getData()
     ));
   })
   .catch(
-    (err) => {
-      showAlert(err.message);
+    (error) => {
+      showAlert(error.message);
     }
   );
 

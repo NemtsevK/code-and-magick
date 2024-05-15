@@ -1,14 +1,10 @@
-const SIMILAR_WIZARD_COUNT = 4;
-const DefaultColor = {
-  COAT_COLOR: 'rgb(101, 137, 164)',
-  EYES_COLOR: 'black',
-};
+import {SIMILAR_WIZARD_COUNT, DefaultColor} from './const.js';
 
-const similarElement = document.querySelector('.setup-similar');
-const similarListElement = similarElement.querySelector('.setup-similar-list');
-const similarWizardTemplate = document.querySelector('#similar-wizard-template')
+const similarElement = document.querySelector('.setup__similar');
+const similarListElement = similarElement.querySelector('.setup__similar-list');
+const similarWizardTemplate = document.querySelector('#setup__wizard-template')
   .content
-  .querySelector('.setup-similar-item');
+  .querySelector('.setup__similar-item');
 
 const getWizardRank = (wizard) => {
   const coatColorInput = document.querySelector('[name="coat-color"]');
@@ -40,9 +36,9 @@ const renderSimilarList = (similarWizards) => {
     .slice()
     .sort(compareWizards)
     .slice(0, SIMILAR_WIZARD_COUNT)
-    .forEach(({name, colorCoat, colorEyes}) => {
+    .forEach(({ name, colorCoat, colorEyes }) => {
       const wizardElement = similarWizardTemplate.cloneNode(true);
-      wizardElement.querySelector('.setup-similar-label').textContent = name;
+      wizardElement.querySelector('.setup__similar-label').textContent = name;
       wizardElement.querySelector('.wizard-coat').style.fill = colorCoat;
       wizardElement.querySelector('.wizard-eyes').style.fill = colorEyes;
       similarListFragment.appendChild(wizardElement);
@@ -53,4 +49,4 @@ const renderSimilarList = (similarWizards) => {
   similarElement.classList.remove('hidden');
 };
 
-export {renderSimilarList};
+export { renderSimilarList };

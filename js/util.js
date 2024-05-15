@@ -1,4 +1,4 @@
-const ALERT_SHOW_TIME = 5000;
+import {ALERT_SHOW_TIME} from './const.js';
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -9,9 +9,9 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEscapeKey = (event) => event.key === 'Escape';
 
-const isEnterKey = (evt) => evt.key === 'Enter';
+const isEnterKey = (event) => event.key === 'Enter';
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
@@ -24,7 +24,6 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-
   alertContainer.textContent = message;
 
   document.body.append(alertContainer);
@@ -42,4 +41,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {getRandomArrayElement, isEscapeKey, isEnterKey, showAlert, debounce};
+export { getRandomArrayElement, isEscapeKey, isEnterKey, showAlert, debounce };

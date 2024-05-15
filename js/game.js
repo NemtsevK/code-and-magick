@@ -109,20 +109,20 @@ export default function startGame (
   SpriteMap[ObjectType.ME] = {
     width: 61,
     height: 84,
-    url: 'img/wizard.gif',
+    url: 'images/wizard.gif',
   };
 
   // TODO: Find a clever way
   SpriteMap[ObjectType.ME + REVERSED] = {
     width: 61,
     height: 84,
-    url: 'img/wizard-reversed.gif',
+    url: 'images/wizard-reversed.gif',
   };
 
   SpriteMap[ObjectType.FIREBALL] = {
     width: 24,
     height: 24,
-    url: 'img/fireball.gif',
+    url: 'images/fireball.gif',
   };
 
   /**
@@ -424,13 +424,13 @@ export default function startGame (
 
     /**
        * Обработчик событий клавиатуры во время паузы.
-       * @param {KeyboardsEvent} evt
+       * @param {KeyboardsEvent} event
        * @private
        * @private
        */
-    _pauseListener: function (evt) {
-      if (evt.keyCode === 32 && !this._deactivated) {
-        evt.preventDefault();
+    _pauseListener: function (event) {
+      if (event.keyCode === 32 && !this._deactivated) {
+        event.preventDefault();
         const needToRestartTheGame = this.state.currentStatus === Verdict.WIN ||
             this.state.currentStatus === Verdict.FAIL;
         this.initializeLevelAndStart(needToRestartTheGame);
@@ -748,11 +748,11 @@ export default function startGame (
     },
 
     /**
-       * @param {KeyboardEvent} evt [description]
+       * @param {KeyboardEvent} event [description]
        * @private
        */
-    _onKeyDown: function (evt) {
-      switch (evt.keyCode) {
+    _onKeyDown: function (event) {
+      switch (event.keyCode) {
         case 37:
           this.state.keysPressed.LEFT = true;
           break;
@@ -767,17 +767,17 @@ export default function startGame (
           break;
       }
 
-      if (evt.shiftKey) {
+      if (event.shiftKey) {
         this.state.keysPressed.SHIFT = true;
       }
     },
 
     /**
-       * @param {KeyboardEvent} evt [description]
+       * @param {KeyboardEvent} event [description]
        * @private
        */
-    _onKeyUp: function (evt) {
-      switch (evt.keyCode) {
+    _onKeyUp: function (event) {
+      switch (event.keyCode) {
         case 37:
           this.state.keysPressed.LEFT = false;
           break;
@@ -792,7 +792,7 @@ export default function startGame (
           break;
       }
 
-      if (evt.shiftKey) {
+      if (event.shiftKey) {
         this.state.keysPressed.SHIFT = false;
       }
     },

@@ -1,9 +1,9 @@
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+import { FILE_TYPES } from './const.js';
 
-const fileChooser = document.querySelector('.upload input[type=file]');
-const preview = document.querySelector('.setup-user-pic');
+const fileChooser = document.querySelector('.setup__upload-input');
+const preview = document.querySelector('.setup__upload-image');
 
-fileChooser.addEventListener('change', () => {
+const onSetupUploadChange = () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -12,4 +12,6 @@ fileChooser.addEventListener('change', () => {
   if (matches) {
     preview.src = URL.createObjectURL(file);
   }
-});
+};
+
+fileChooser.addEventListener('change', onSetupUploadChange);
