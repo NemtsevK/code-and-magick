@@ -475,8 +475,8 @@
 .social__link::before {
   content: "";
   display: block;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
